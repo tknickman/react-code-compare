@@ -1,16 +1,31 @@
-import ReactDiff from "react-code-compare";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import DiffViewer from "../components/diff-view";
 
-import oldJson from "../diffs/small/old.json";
-import newJson from "../diffs/small/new.json";
+export default function LargeExample() {
+  const [oldVal, setOldVal] = useState("");
+  const [newVal, setNewVal] = useState("");
 
-export default function Examples() {
+  useEffect(() => {
+    console.time('Received values')
+    console.time('Old file fetch');
+    axios.get("/api/small/old").then((res) => {
+      setOldVal(res.data);
+    }).finally(() => {
+      console.timeEnd('Old file fetch');
+    });
+    console.time('New file fetch');
+    axios.get("/api/small/new").then((res) => {
+      setNewVal(res.data);
+    }).finally(() => {
+      console.timeEnd('New file fetch');
+    });
+  }, []);
+
   return (
-    <div>
-      <h1>Basic Example</h1>
-      <ReactDiff
-        oldValue={JSON.stringify(oldJson, null, 2)}
-        newValue={JSON.stringify(newJson, null, 2)}
-      />
-    </div>
+    <main>
+      <h1>Small Example</h1>
+      <DiffViewer oldVal={oldVal} newVal={newVal} />
+    </main>
   );
 }

@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 250px;
+  height: 500px;
+  width: 900px;
+  position: relative;
+  background: var(--geist-background);
+  font-size: 12px;
+}
