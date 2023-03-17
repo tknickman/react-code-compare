@@ -1,0 +1,61 @@
+{
+  "name": "react-code-compare",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A simple and beautiful text diff viewer component made with diff and React",
+  "keywords": [
+    "review",
+    "code-review",
+    "diff",
+    "diff-viewer",
+    "github",
+    "react",
+    "react-component",
+    "ui"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build:tsc": "tsc --outDir dist/",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint --ext .ts,.tsx src"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "create-emotion": "^10.0.14",
+    "diff": "^4.0.1",
+    "emotion": "^10.0.14",
+    "memoize-one": "^5.0.4",
+    "prop-types": "^15.6.2",
+    "react-window": "^1.8.8"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.6",
+    "@types/diff": "^4.0.2",
+    "@types/memoize-one": "^4.1.1",
+    "@types/node": "^12.0.12",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "eslint": "^8.36.0",
+    "eslint-config-custom": "*",
+    "gh-pages": "^2.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "spy": "^1.0.0",
+    "ts-loader": "^6.0.4",
+    "ts-node": "^8.3.0",
+    "tsconfig": "*",
+    "tsup": "^6.6.3",
+    "typescript": "^5.0.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
+  "engines": {
+    "node": ">= 16.0.0"
+  }
+}

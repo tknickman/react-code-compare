@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "target": "ES6",
+    "declaration": true,
+    "downlevelIteration": true,
+    "lib": ["es2017", "dom"],
+    "types": [
+      "node"
+    ]
+  },
+  "include": ["./src/*"],
+  "exclude": ["node_modules"],
+}
