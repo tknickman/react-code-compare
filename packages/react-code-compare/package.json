@@ -24,6 +24,7 @@
     "lint": "eslint --ext .ts,.tsx src"
   },
   "dependencies": {
+    "@tanstack/react-virtual": "^3.0.0-alpha.0",
     "classnames": "^2.2.6",
     "create-emotion": "^10.0.14",
     "diff": "^4.0.1",
