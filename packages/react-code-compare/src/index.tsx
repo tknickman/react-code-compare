@@ -190,7 +190,9 @@ class DiffViewer extends React.Component<
             [this.styles.wordRemoved]: wordDiff.type === DiffType.REMOVED,
           })}
         >
-          {renderer ? renderer(wordDiff.value as string) : wordDiff.value as string}
+          {renderer
+            ? renderer(wordDiff.value as string)
+            : (wordDiff.value as string)}
         </span>
       )
     );
@@ -543,6 +545,103 @@ class DiffViewer extends React.Component<
     );
   };
 
+  // instead of returning components here, we return the props for a component that we will use in render
+  private getDiffRowData = () => {
+    const {
+      oldValue,
+      newValue,
+      splitView,
+      disableWordDiff,
+      compareMethod,
+      linesOffset,
+    } = this.props;
+    const { lineInformation, diffLines } = computeLineInformation(
+      oldValue,
+      newValue,
+      disableWordDiff,
+      compareMethod,
+      linesOffset
+    );
+    const extraLines =
+      this.props.extraLinesSurroundingDiff < 0
+        ? 0
+        : this.props.extraLinesSurroundingDiff;
+    let skippedLines: number[] = [];
+
+    const diffRowData: Array<{
+      component: string;
+      type: string;
+      data: any;
+    }> = [];
+    lineInformation.forEach((line: LineInformation, i: number) => {
+      const diffBlockStart = diffLines[0];
+      const currentPosition = diffBlockStart - i;
+      if (this.props.showDiffOnly) {
+        if (currentPosition === -extraLines) {
+          skippedLines = [];
+          diffLines.shift();
+        }
+        if (
+          line.left.type === DiffType.DEFAULT &&
+          (currentPosition > extraLines ||
+            typeof diffBlockStart === "undefined") &&
+          !this.state.expandedBlocks.includes(diffBlockStart)
+        ) {
+          skippedLines.push(i + 1);
+          if (i === lineInformation.length - 1 && skippedLines.length > 1) {
+            diffRowData.push({
+              component: `SkippedLineIndicator`,
+              type: "skipped",
+              data: {
+                num: skippedLines.length,
+                blockNumber: diffBlockStart,
+                leftBlockLineNumber: line.left.lineNumber,
+                rightBlockLineNumber: line.right.lineNumber,
+              },
+            });
+          }
+        }
+      }
+
+      if (currentPosition === extraLines && skippedLines.length > 0) {
+        const { length } = skippedLines;
+        skippedLines = [];
+        diffRowData.push({
+          component: `SkippedLineIndicator`,
+          type: "skipped",
+          data: {
+            num: length,
+            blockNumber: diffBlockStart,
+            leftBlockLineNumber: line.left.lineNumber,
+            rightBlockLineNumber: line.right.lineNumber,
+          },
+        });
+      }
+
+      if (splitView) {
+        diffRowData.push({
+          component: `Line`,
+          type: "split",
+          data: {
+            line,
+            index: i,
+          },
+        });
+      } else {
+        diffRowData.push({
+          component: `Line`,
+          type: "unified",
+          data: {
+            line,
+            index: i,
+          },
+        });
+      }
+    });
+
+    return diffRowData;
+  };
+
   public render = (): JSX.Element => {
     const {
       oldValue,
@@ -560,6 +659,7 @@ class DiffViewer extends React.Component<
 
     this.styles = this.computeStyles(this.props.styles, useDarkTheme);
     const nodes = this.renderDiff();
+    const nodeData = this.getDiffRowData();
     const colSpanOnSplitView = hideLineNumbers ? 2 : 3;
     const colSpanOnInlineView = hideLineNumbers ? 2 : 4;
 
@@ -579,6 +679,9 @@ class DiffViewer extends React.Component<
       </tr>
     );
 
+    console.log("nodeData", nodeData);
+    console.log("nodes", nodes.filter(Boolean).length);
+
     return (
       <table
         className={cn(this.styles.diffContainer, {
@@ -588,6 +691,23 @@ class DiffViewer extends React.Component<
         <tbody>
           {title}
           {nodes}
+          {/* {nodeData.map((node) => {
+            if (node.type === "skipped") {
+              return this.renderSkippedLineIndicator(
+                node.data.num,
+                node.data.blockNumber,
+                node.data.leftBlockLineNumber,
+                node.data.rightBlockLineNumber
+              );
+            }
+            if (node.type === "split") {
+              return this.renderSplitView(node.data.line, node.data.index);
+            }
+            if (node.type === "unified") {
+              return this.renderInlineView(node.data.line, node.data.index);
+            }
+            return null
+          })} */}
         </tbody>
       </table>
     );

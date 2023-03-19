@@ -3,8 +3,9 @@
   flex: 1 1 auto;
   overflow-y: auto;
   min-height: 250px;
-  height: 500px;
-  width: 900px;
+  height: 900px;
+  width: 1200px;
+  border: 1px solid red;
   position: relative;
   background: var(--geist-background);
   font-size: 12px;

@@ -18,19 +18,22 @@ export const splitViewStyles: ReactDiffViewerStylesOverride = {
 export default function DiffView({
   oldVal,
   newVal,
+  reactDiffRef
 }: {
   oldVal: string;
   newVal: string;
+  reactDiffRef?: React.RefObject<ReactDiff>;
 }) {
   useEffect(() => {
     if (newVal !== "" && oldVal !== "") {
-      console.timeEnd('Received values')
+      console.timeEnd("Received values");
     }
   }, [newVal, oldVal]);
 
   return (
     <div className={styles.container}>
       <ReactDiff
+        ref={reactDiffRef}
         showDiffOnly={true}
         compareMethod={DiffMethod.LINES}
         oldValue={oldVal}
