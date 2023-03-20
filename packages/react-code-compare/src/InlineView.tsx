@@ -1,6 +1,6 @@
 import { LineInformation, DiffType } from "./compute-lines";
 import { Row } from "./Row";
-import { ReactDiffViewerStyles } from "./styles";
+import { ReactCodeCompareStyles } from "./styles";
 import { LineNumberPrefix } from "./constants";
 import { LineDiffViewOptions, OnLineNumberClickProxy } from "./types";
 import { Line } from "./Line";
@@ -13,7 +13,7 @@ export function InlineView({
   diffViewOptions,
 }: {
   lineInformation: LineInformation;
-  styles: ReactDiffViewerStyles;
+  styles: ReactCodeCompareStyles;
   highlightLines: string[];
   onLineNumberClickProxy: OnLineNumberClickProxy;
   diffViewOptions: LineDiffViewOptions;

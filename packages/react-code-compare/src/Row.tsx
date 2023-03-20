@@ -1,6 +1,6 @@
 import { Ref } from "react";
 import cn from "classnames";
-import { ReactDiffViewerStyles } from "./styles";
+import { ReactCodeCompareStyles } from "./styles";
 
 export function Row({
   className,
@@ -9,7 +9,7 @@ export function Row({
   ref,
 }: {
   className?: string;
-  styles: ReactDiffViewerStyles;
+  styles: ReactCodeCompareStyles;
   children: React.ReactNode;
   ref?: Ref<HTMLTableRowElement>;
 }) {

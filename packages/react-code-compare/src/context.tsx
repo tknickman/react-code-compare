@@ -1,17 +1,23 @@
-import { useState, createContext, Dispatch, SetStateAction, useContext } from "react";
-import { ReactDiffViewerState } from "./types";
+import {
+  useState,
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+} from "react";
+import { ReactCodeCompareState } from "./types";
 
 export const CodeCompareContext = createContext<{
   resetCodeBlocks: () => boolean;
-  expandedBlocks: ReactDiffViewerState["expandedBlocks"];
+  expandedBlocks: ReactCodeCompareState["expandedBlocks"];
   setExpandedBlocks: Dispatch<
-    SetStateAction<ReactDiffViewerState["expandedBlocks"]>
+    SetStateAction<ReactCodeCompareState["expandedBlocks"]>
   >;
 }>(null);
 
 export function CodeCompare({ children }: { children: React.ReactNode }) {
   const [expandedBlocks, setExpandedBlocks] = useState<
-    ReactDiffViewerState["expandedBlocks"]
+    ReactCodeCompareState["expandedBlocks"]
   >([]);
 
   const resetCodeBlocks = (): boolean => {

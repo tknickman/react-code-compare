@@ -1,10 +1,10 @@
 import type { AppProps } from "next/app";
-import { CodeCompare } from "react-code-compare";
+import { CodeCompareProvider } from "react-code-compare";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CodeCompare>
+    <CodeCompareProvider>
       <Component {...pageProps} />
-    </CodeCompare>
+    </CodeCompareProvider>
   );
 }

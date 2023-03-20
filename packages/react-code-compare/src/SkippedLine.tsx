@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { SkippedLineIndicatorProps, OnBlockClickProxy } from "./types";
-import { ReactDiffViewerStyles } from "./styles";
+import { ReactCodeCompareStyles } from "./styles";
 import { Row } from "./Row";
 
 export function SkippedLinesIndicator({
@@ -16,7 +16,7 @@ export function SkippedLinesIndicator({
   rightBlockLineNumber,
 }: SkippedLineIndicatorProps & {
   onBlockClickProxy: OnBlockClickProxy;
-  styles: ReactDiffViewerStyles;
+  styles: ReactCodeCompareStyles;
   num: number;
   blockNumber: number;
   leftBlockLineNumber: number;

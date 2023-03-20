@@ -1,8 +1,8 @@
 import { MouseEvent } from "react";
-import { ReactDiffViewerStylesOverride } from "./styles";
-import { DiffMethod } from "./compute-lines";
+import { ReactCodeCompareStylesOverride } from "./styles";
+import { DiffMethod, LineInformation } from "./compute-lines";
 
-export interface ReactDiffViewerProps {
+export interface ReactCodeCompareProps {
   // Old value to compare.
   oldValue: string;
   // New value to compare.
@@ -38,7 +38,7 @@ export interface ReactDiffViewerProps {
   // Array of line ids to highlight lines.
   highlightLines?: string[];
   // Style overrides.
-  styles?: ReactDiffViewerStylesOverride;
+  styles?: ReactCodeCompareStylesOverride;
   // Use dark theme.
   useDarkTheme?: boolean;
   // Title for left column
@@ -50,7 +50,7 @@ export interface ReactDiffViewerProps {
 }
 
 export type VirtualTableProps = Pick<
-  ReactDiffViewerProps,
+  ReactCodeCompareProps,
   | "hideLineNumbers"
   | "useVirtual"
   | "parentRef"
@@ -59,14 +59,14 @@ export type VirtualTableProps = Pick<
 >;
 
 export type SkippedLineIndicatorProps = Pick<
-  ReactDiffViewerProps,
+  ReactCodeCompareProps,
   "hideLineNumbers" | "codeFoldMessageRenderer" | "splitView"
 >;
 
 export type SHORT_PREFIX = "L" | "R";
 
 export type LineDiffViewOptions = Pick<
-  ReactDiffViewerProps,
+  ReactCodeCompareProps,
   "hideLineNumbers" | "splitView" | "renderContent"
 >;
 
@@ -81,10 +81,34 @@ export type LineProps = {
   diffViewOptions: LineDiffViewOptions;
 };
 
-export type OnBlockClickProxy = (id: number) => (e: MouseEvent<HTMLAnchorElement>) => void
-export type OnLineNumberClickProxy = (id: string) => (e: MouseEvent<HTMLTableCellElement>) => void
+export type OnBlockClickProxy = (
+  id: number
+) => (e: MouseEvent<HTMLAnchorElement>) => void;
+export type OnLineNumberClickProxy = (
+  id: string
+) => (e: MouseEvent<HTMLTableCellElement>) => void;
 
-export interface ReactDiffViewerState {
+export interface ReactCodeCompareState {
   // Array holding the expanded code folding.
   expandedBlocks?: number[];
 }
+
+export type SkippedRowData = {
+  type: "skipped";
+  data: {
+    num: number;
+    blockNumber: number;
+    leftBlockLineNumber: number;
+    rightBlockLineNumber: number;
+  };
+};
+
+export type RowData = {
+  type: "split" | "unified";
+  data: {
+    line: LineInformation;
+    index: number;
+  };
+};
+
+export type AllRowData = Array<SkippedRowData | RowData>;

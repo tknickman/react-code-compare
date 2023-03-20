@@ -1,8 +1,14 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
 import cn from "classnames";
-import { ReactDiffViewerStyles } from "./styles";
+import { ReactCodeCompareStyles } from "./styles";
 import { SkippedLinesIndicator } from "./SkippedLine";
-import { VirtualTableProps, LineDiffViewOptions, OnBlockClickProxy, OnLineNumberClickProxy } from "./types";
+import {
+  VirtualTableProps,
+  LineDiffViewOptions,
+  OnBlockClickProxy,
+  OnLineNumberClickProxy,
+  AllRowData,
+} from "./types";
 import { InlineView } from "./InlineView";
 import { SplitView } from "./SplitView";
 
@@ -20,8 +26,8 @@ export function VirtualTable({
   diffViewOptions,
 }: VirtualTableProps & {
   title: React.ReactNode;
-  items: any[];
-  styles: ReactDiffViewerStyles;
+  items: AllRowData;
+  styles: ReactCodeCompareStyles;
   highlightLines: string[];
   diffViewOptions: LineDiffViewOptions;
   onLineNumberClickProxy: OnLineNumberClickProxy;

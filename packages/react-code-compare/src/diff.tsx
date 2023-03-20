@@ -7,15 +7,15 @@ import {
   DiffMethod,
 } from "./compute-lines";
 import computeStyles, {
-  ReactDiffViewerStylesOverride,
-  ReactDiffViewerStyles,
+  ReactCodeCompareStylesOverride,
+  ReactCodeCompareStyles,
 } from "./styles";
-import { ReactDiffViewerProps } from "./types";
+import { ReactCodeCompareProps, AllRowData } from "./types";
 import { VirtualTable } from "./VirtualTable";
 import { Table } from "./Table";
 import { useCodeCompare } from "./context";
 
-const defaultProps: ReactDiffViewerProps = {
+const defaultProps: ReactCodeCompareProps = {
   oldValue: "",
   newValue: "",
   splitView: true,
@@ -30,7 +30,7 @@ const defaultProps: ReactDiffViewerProps = {
   linesOffset: 0,
 };
 
-function DiffViewer(props: ReactDiffViewerProps) {
+export function ComparisonView(props: ReactCodeCompareProps) {
   const {
     oldValue = defaultProps.oldValue,
     newValue = defaultProps.newValue,
@@ -57,9 +57,9 @@ function DiffViewer(props: ReactDiffViewerProps) {
   const { expandedBlocks, setExpandedBlocks } = useCodeCompare();
 
   const getStyles: (
-    styles: ReactDiffViewerStylesOverride,
+    styles: ReactCodeCompareStylesOverride,
     isDark: boolean
-  ) => ReactDiffViewerStyles = memoize(computeStyles);
+  ) => ReactCodeCompareStyles = memoize(computeStyles);
 
   const styles = getStyles(overrideStyles, useDarkTheme);
 
@@ -89,7 +89,7 @@ function DiffViewer(props: ReactDiffViewerProps) {
       onBlockExpand(id);
 
   // instead of returning components here, we return the props for a component that we will use in render
-  const getDiffRowData = () => {
+  const getDiffRowData = (): AllRowData => {
     const { lineInformation, diffLines } = computeLineInformation(
       oldValue,
       newValue,
@@ -118,7 +118,6 @@ function DiffViewer(props: ReactDiffViewerProps) {
           skippedLines.push(i + 1);
           if (i === lineInformation.length - 1 && skippedLines.length > 1) {
             return {
-              component: `SkippedLineIndicator`,
               type: "skipped",
               data: {
                 num: skippedLines.length,
@@ -136,7 +135,6 @@ function DiffViewer(props: ReactDiffViewerProps) {
         const { length } = skippedLines;
         skippedLines = [];
         return {
-          component: `SkippedLineIndicator`,
           type: "skipped",
           data: {
             num: length,
@@ -149,7 +147,6 @@ function DiffViewer(props: ReactDiffViewerProps) {
 
       if (splitView) {
         return {
-          component: `Line`,
           type: "split",
           data: {
             line,
@@ -158,7 +155,6 @@ function DiffViewer(props: ReactDiffViewerProps) {
         };
       }
       return {
-        component: `Line`,
         type: "unified",
         data: {
           line,
@@ -231,6 +227,3 @@ function DiffViewer(props: ReactDiffViewerProps) {
     />
   );
 }
-
-export default DiffViewer;
-export { ReactDiffViewerStylesOverride, DiffMethod };

@@ -1,11 +1,11 @@
 import cn from "classnames";
-import { ReactDiffViewerStyles } from "./styles";
+import { ReactCodeCompareStyles } from "./styles";
 import { DiffType, DiffInformation } from "./compute-lines";
 import { SHORT_PREFIX, LineProps, OnLineNumberClickProxy } from "./types";
 
 const renderWordDiff = (
   diffArray: DiffInformation[],
-  styles: ReactDiffViewerStyles,
+  styles: ReactCodeCompareStyles,
   renderer?: (chunk: string) => JSX.Element
 ): JSX.Element[] =>
   diffArray.map(
@@ -35,7 +35,7 @@ export function Line({
 }: LineProps & {
   line: DiffInformation;
   prefix: SHORT_PREFIX;
-  styles: ReactDiffViewerStyles;
+  styles: ReactCodeCompareStyles;
   highlightLines: string[];
   onLineNumberClickProxy: OnLineNumberClickProxy;
   additionalLineNumber?: number;

@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 import {
-  DiffViewer,
-  ReactDiffViewerStylesOverride,
+  ComparisonView,
+  ReactCodeCompareStylesOverride,
   DiffMethod,
 } from "react-code-compare";
 
 import styles from "./styles.module.css";
 
-export const splitViewStyles: ReactDiffViewerStylesOverride = {
+export const splitViewStyles: ReactCodeCompareStylesOverride = {
   diffContainer: {
     maxWidth: "100%",
   },
@@ -36,7 +36,7 @@ export default function DiffView({
 
   return (
     <div className={styles.container} ref={diffView}>
-      <DiffViewer
+      <ComparisonView
         splitView={isSplit}
         showDiffOnly={true}
         compareMethod={DiffMethod.LINES}

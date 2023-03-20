@@ -1,15 +1,15 @@
-import { CodeCompare } from "./context";
-import DiffViewer, { DiffMethod } from "./diff";
-import { ReactDiffViewerProps } from "./types";
-import { ReactDiffViewerStylesOverride } from "./styles";
+import { CodeCompare as CodeCompareProvider, useCodeCompare } from "./context";
+import { ComparisonView } from "./diff";
+import { DiffMethod } from "./compute-lines";
+import { ReactCodeCompareProps } from "./types";
+import { ReactCodeCompareStylesOverride } from "./styles";
 
-export default function DiffView(props: ReactDiffViewerProps) {
+export default function DiffView(props: ReactCodeCompareProps) {
   return (
-    <CodeCompare>
-      <DiffViewer {...props} />
-    </CodeCompare>
+    <CodeCompareProvider>
+      <ComparisonView {...props} />
+    </CodeCompareProvider>
   );
 }
-
-export { CodeCompare, useCodeCompare } from "./context";
-export { ReactDiffViewerStylesOverride, DiffMethod, DiffViewer };
+export { CodeCompareProvider, useCodeCompare} 
+export { ReactCodeCompareStylesOverride, DiffMethod, ComparisonView };
