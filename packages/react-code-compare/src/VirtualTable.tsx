@@ -33,13 +33,13 @@ export function VirtualTable({
   diffViewOptions: LineDiffViewOptions;
   onLineNumberClickProxy: OnLineNumberClickProxy;
   onBlockClickProxy: OnBlockClickProxy;
-  virtualizerOptions: VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>;
+  virtualizerOptions?: VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>;
 }) {
   // TODO: parent should be a generic
   const virtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
     count: items.length,
     getScrollElement: () => parentRef.current,
-    ...virtualizerOptions
+    ...virtualizerOptions || {} as VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
   });
 
   const vItems = virtualizer.getVirtualItems();

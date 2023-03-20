@@ -1,4 +1,5 @@
 import { MouseEvent } from "react";
+import { VirtualizerOptions } from "@tanstack/react-virtual";
 import { ReactCodeCompareStylesOverride } from "./styles";
 import { DiffMethod, LineInformation } from "./compute-lines";
 
@@ -47,6 +48,7 @@ export interface ReactCodeCompareProps {
   rightTitle?: string | JSX.Element;
   useVirtual?: boolean;
   parentRef?: React.RefObject<HTMLDivElement>;
+  virtualizerOptions?: VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
 }
 
 export type VirtualTableProps = Pick<

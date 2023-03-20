@@ -27,7 +27,7 @@ const defaultProps: ReactCodeCompareProps = {
   extraLinesSurroundingDiff: 3,
   showDiffOnly: true,
   useDarkTheme: false,
-  linesOffset: 0,
+  linesOffset: 0
 };
 
 export function ComparisonView(props: ReactCodeCompareProps) {
@@ -52,6 +52,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
     codeFoldMessageRenderer,
     useVirtual,
     parentRef,
+    virtualizerOptions
   } = props;
 
   const { expandedBlocks, setExpandedBlocks } = useCodeCompare();
@@ -208,6 +209,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
         codeFoldMessageRenderer={codeFoldMessageRenderer}
         parentRef={parentRef}
         diffViewOptions={diffViewOptions}
+        virtualizerOptions={virtualizerOptions}
       />
     );
   }
