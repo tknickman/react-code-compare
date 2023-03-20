@@ -1,4 +1,4 @@
-import { useVirtualizer } from "@tanstack/react-virtual";
+import { useVirtualizer, VirtualizerOptions } from "@tanstack/react-virtual";
 import cn from "classnames";
 import { ReactCodeCompareStyles } from "./styles";
 import { SkippedLinesIndicator } from "./SkippedLine";
@@ -24,6 +24,7 @@ export function VirtualTable({
   highlightLines,
   onLineNumberClickProxy,
   diffViewOptions,
+  virtualizerOptions,
 }: VirtualTableProps & {
   title: React.ReactNode;
   items: AllRowData;
@@ -32,12 +33,13 @@ export function VirtualTable({
   diffViewOptions: LineDiffViewOptions;
   onLineNumberClickProxy: OnLineNumberClickProxy;
   onBlockClickProxy: OnBlockClickProxy;
+  virtualizerOptions: VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>;
 }) {
+  // TODO: parent should be a generic
   const virtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
     count: items.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 27,
-    overscan: 10,
+    ...virtualizerOptions
   });
 
   const vItems = virtualizer.getVirtualItems();
