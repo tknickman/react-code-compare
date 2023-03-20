@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -10,10 +10,8 @@
     "declaration": true,
     "downlevelIteration": true,
     "lib": ["es2017", "dom"],
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": ["./src/*"],
-  "exclude": ["node_modules"],
+  "include": ["./src/*", "src/diff.tsx"],
+  "exclude": ["node_modules"]
 }

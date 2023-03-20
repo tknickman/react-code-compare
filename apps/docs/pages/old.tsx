@@ -1,18 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import DiffViewer from "../components/diff-view";
-import  {
-  useCodeCompare
-} from "react-code-compare";
+import ReactDiff, {
+  ReactDiffViewerStylesOverride,
+  DiffMethod,
+} from "react-diff-viewer";
 
+import styles from "../components/diff-view/styles.module.css";
 
+export const splitViewStyles: ReactDiffViewerStylesOverride = {
+  diffContainer: {
+    maxWidth: "100%",
+  },
+  contentText: {
+    overflowWrap: "anywhere",
+  },
+};
 
-export default function LargeExample() {
-  const { resetCodeBlocks } = useCodeCompare();
+export default function Old() {
+  const diffView = useRef<ReactDiff>(null);
   const [oldVal, setOldVal] = useState("");
   const [newVal, setNewVal] = useState("");
-  const [diffExpanded, setDiffExpanded] = useState(0);
-  const [isSplit, setIsSplit] = useState(false);
   const [numTableRows, setNumTableRows] = useState<number | undefined>();
 
   useEffect(() => {
@@ -60,24 +67,26 @@ export default function LargeExample() {
   }, []);
 
   const onFoldReset = () => {
-    resetCodeBlocks()
+    if (diffView.current) {
+      diffView.current.resetCodeBlocks();
+    }
   };
 
   return (
     <main id="DiffContainer">
       <h1>Small Example</h1>
       <pre>Table Rows in Dom: {numTableRows}</pre>
-      <pre>Diff Expanded: {diffExpanded}</pre>
       <button onClick={onFoldReset}>Reset</button>
-      <button
-        onClick={() => setIsSplit((prevVal) => !prevVal)}
-      >{`Toggle View (${isSplit ? "split" : "unified"})`}</button>
-      <DiffViewer
-        oldVal={oldVal}
-        newVal={newVal}
-        isSplit={isSplit}
-        onDiffExpand={() => setDiffExpanded(prevVal => prevVal + 1)}
-      />
+      <div className={styles.container}>
+        <ReactDiff
+          ref={diffView}
+          showDiffOnly={true}
+          compareMethod={DiffMethod.LINES}
+          oldValue={oldVal}
+          newValue={newVal}
+          styles={splitViewStyles}
+        />
+      </div>
     </main>
   );
 }
