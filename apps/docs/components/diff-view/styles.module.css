@@ -1,12 +1,42 @@
 .container {
   display: flex;
-  flex: 1 1 auto;
   overflow-y: auto;
   min-height: 250px;
-  height: 800px;
-  width: 1500px;
-  border: 1px solid red;
+  height: 500px;
+  width: 50%;
+  /* border: 1px solid red; */
   position: relative;
   background: var(--geist-background);
   font-size: 12px;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: col;
+}
+
+.headerContainer {
+  display: flex;
+  width: 50%;
+  position: relative;
+  background: var(--geist-background);
+  font-size: 12px;
+  flex-direction: column;
+}
+
+.headerLeft {
+  display: flex;
+  width: 50%;
+  background-color: blue;
+}
+
+.headerRight {
+  display: flex;
+  width: 50%;
+  background-color: red;
+}
+
+.parent {
+  display: grid;
 }

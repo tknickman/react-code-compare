@@ -25,7 +25,7 @@ export function SkippedLinesIndicator({
   const message = codeFoldMessageRenderer ? (
     codeFoldMessageRenderer(num, leftBlockLineNumber, rightBlockLineNumber)
   ) : (
-    <pre className={styles.codeFoldContent}>Expand {num} lines ...</pre>
+    <pre className={styles.codeFoldContent}>{`Expand ${num} lines ...`}</pre>
   );
   const content = (
     <td>

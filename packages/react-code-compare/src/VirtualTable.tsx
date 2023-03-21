@@ -1,5 +1,7 @@
-import { useVirtualizer, VirtualizerOptions } from "@tanstack/react-virtual";
+import { useEffect } from "react";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import cn from "classnames";
+import { useCodeCompare } from "./context";
 import { ReactCodeCompareStyles } from "./styles";
 import { SkippedLinesIndicator } from "./SkippedLine";
 import {
@@ -8,6 +10,7 @@ import {
   OnBlockClickProxy,
   OnLineNumberClickProxy,
   AllRowData,
+  AdditionalVirtualizerOptions,
 } from "./types";
 import { InlineView } from "./InlineView";
 import { SplitView } from "./SplitView";
@@ -33,14 +36,19 @@ export function VirtualTable({
   diffViewOptions: LineDiffViewOptions;
   onLineNumberClickProxy: OnLineNumberClickProxy;
   onBlockClickProxy: OnBlockClickProxy;
-  virtualizerOptions?: VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>;
+  virtualizerOptions?: AdditionalVirtualizerOptions;
 }) {
+  const { setVirtualizer } = useCodeCompare();
   // TODO: parent should be a generic
   const virtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
     count: items.length,
     getScrollElement: () => parentRef.current,
-    ...virtualizerOptions || {} as VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
+    ...(virtualizerOptions || ({} as AdditionalVirtualizerOptions)),
   });
+
+  useEffect(() => {
+    setVirtualizer(virtualizer);
+  }, [virtualizer]);
 
   const vItems = virtualizer.getVirtualItems();
 
@@ -69,8 +77,15 @@ export function VirtualTable({
         }}
       >
         {title}
+        {splitView ? (
+          <colgroup>
+            <col span={3} className="left" />
+            <col span={3} className="right" />
+          </colgroup>
+        ) : undefined}
         {vItems.map((virtualItem) => {
           const node = items[virtualItem.index];
+
           if (node.type === "skipped") {
             return (
               <SkippedLinesIndicator

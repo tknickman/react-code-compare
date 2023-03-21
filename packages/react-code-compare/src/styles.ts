@@ -72,6 +72,7 @@ export interface ReactCodeCompareStylesOverride {
   wordAdded?: Interpolation;
   wordRemoved?: Interpolation;
   codeFoldGutter?: Interpolation;
+  codeFoldContent?: Interpolation;
   emptyLine?: Interpolation;
   content?: Interpolation;
   titleBlock?: Interpolation;

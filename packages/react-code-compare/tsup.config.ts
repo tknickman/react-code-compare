@@ -4,7 +4,7 @@ export default defineConfig((options: Options) => ({
   entry: ["src/**/*.ts", "src/**/*.tsx"],
   format: ["cjs"],
   dts: true,
-  minify: true,
+  minify: false,
   clean: true,
   external: ["react"],
   ...options,

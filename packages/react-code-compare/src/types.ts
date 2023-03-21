@@ -3,6 +3,13 @@ import { VirtualizerOptions } from "@tanstack/react-virtual";
 import { ReactCodeCompareStylesOverride } from "./styles";
 import { DiffMethod, LineInformation } from "./compute-lines";
 
+export type PartialKeys<T, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>;
+export type AdditionalVirtualizerOptions = PartialKeys<
+  VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>,
+  "observeElementRect" | "observeElementOffset" | "scrollToFn"
+>;
+
 export interface ReactCodeCompareProps {
   // Old value to compare.
   oldValue: string;
@@ -48,7 +55,7 @@ export interface ReactCodeCompareProps {
   rightTitle?: string | JSX.Element;
   useVirtual?: boolean;
   parentRef?: React.RefObject<HTMLDivElement>;
-  virtualizerOptions?: VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
+  virtualizerOptions?: AdditionalVirtualizerOptions;
 }
 
 export type VirtualTableProps = Pick<

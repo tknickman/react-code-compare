@@ -5,6 +5,7 @@ import {
   SetStateAction,
   useContext,
 } from "react";
+import { Virtualizer } from "@tanstack/react-virtual";
 import { ReactCodeCompareState } from "./types";
 
 export const CodeCompareContext = createContext<{
@@ -13,12 +14,18 @@ export const CodeCompareContext = createContext<{
   setExpandedBlocks: Dispatch<
     SetStateAction<ReactCodeCompareState["expandedBlocks"]>
   >;
+  virtualizer?: Virtualizer<HTMLDivElement, HTMLTableRowElement>;
+  setVirtualizer: Dispatch<
+    SetStateAction<Virtualizer<HTMLDivElement, HTMLTableRowElement>>
+  >;
 }>(null);
 
 export function CodeCompare({ children }: { children: React.ReactNode }) {
   const [expandedBlocks, setExpandedBlocks] = useState<
     ReactCodeCompareState["expandedBlocks"]
   >([]);
+  const [virtualizer, setVirtualizer] =
+    useState<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(undefined);
 
   const resetCodeBlocks = (): boolean => {
     if (expandedBlocks.length > 0) {
@@ -35,8 +42,10 @@ export function CodeCompare({ children }: { children: React.ReactNode }) {
         resetCodeBlocks,
         // values
         expandedBlocks,
+        virtualizer,
         // setters
         setExpandedBlocks,
+        setVirtualizer,
       }}
     >
       {children}

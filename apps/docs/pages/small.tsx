@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import DiffViewer from "../components/diff-view";
-import  {
-  useCodeCompare
-} from "react-code-compare";
-
-
+import { useCodeCompare } from "react-code-compare";
 
 export default function LargeExample() {
-  const { resetCodeBlocks } = useCodeCompare();
+  const { resetCodeBlocks, virtualizer } = useCodeCompare();
   const [oldVal, setOldVal] = useState("");
+  const [jumpTo, setJumpTo] = useState(0);
   const [newVal, setNewVal] = useState("");
   const [diffExpanded, setDiffExpanded] = useState(0);
-  const [isSplit, setIsSplit] = useState(false);
+  const [isSplit, setIsSplit] = useState(true);
   const [numTableRows, setNumTableRows] = useState<number | undefined>();
 
   useEffect(() => {
@@ -33,7 +30,6 @@ export default function LargeExample() {
       observer.observe(targetNode, config);
     }
 
-    // Later, you can stop observing
     return () => observer.disconnect();
   }, []);
 
@@ -60,7 +56,7 @@ export default function LargeExample() {
   }, []);
 
   const onFoldReset = () => {
-    resetCodeBlocks()
+    resetCodeBlocks();
   };
 
   return (
@@ -69,6 +65,15 @@ export default function LargeExample() {
       <pre>Table Rows in Dom: {numTableRows}</pre>
       <pre>Diff Expanded: {diffExpanded}</pre>
       <button onClick={onFoldReset}>Reset</button>
+      <button onClick={() => virtualizer && virtualizer.scrollToIndex(jumpTo, { 
+        align: "start",
+      })}>
+        Jump to {jumpTo}
+      </button>
+      <input
+        onChange={(e) => setJumpTo(Number(e.target.value))}
+        value={jumpTo}
+      />
       <button
         onClick={() => setIsSplit((prevVal) => !prevVal)}
       >{`Toggle View (${isSplit ? "split" : "unified"})`}</button>
@@ -76,7 +81,7 @@ export default function LargeExample() {
         oldVal={oldVal}
         newVal={newVal}
         isSplit={isSplit}
-        onDiffExpand={() => setDiffExpanded(prevVal => prevVal + 1)}
+        onDiffExpand={() => setDiffExpanded((prevVal) => prevVal + 1)}
       />
     </main>
   );

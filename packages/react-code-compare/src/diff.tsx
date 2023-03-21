@@ -170,6 +170,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
   }
 
   const nodeData = getDiffRowData().filter(Boolean);
+  
   const colSpanOnSplitView = hideLineNumbers ? 2 : 3;
   const colSpanOnInlineView = hideLineNumbers ? 2 : 4;
 
