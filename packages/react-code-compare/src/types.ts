@@ -115,6 +115,7 @@ export type SkippedRowData = {
 export type RowData = {
   type: "split" | "unified";
   data: {
+    order?: 'left' | 'right';
     line: LineInformation;
     index: number;
   };

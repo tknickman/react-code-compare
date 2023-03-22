@@ -11,16 +11,20 @@ export function SplitView({
   highlightLines,
   onLineNumberClickProxy,
   diffViewOptions,
+  rowIndex,
+  rowRef,
 }: {
   lineInformation: LineInformation;
   styles: ReactCodeCompareStyles;
   highlightLines: string[];
   onLineNumberClickProxy: OnLineNumberClickProxy;
   diffViewOptions: LineDiffViewOptions;
+  rowIndex?: number;
+  rowRef?: (node: HTMLTableRowElement) => void;
 }): JSX.Element {
   const { left, right } = lineInformation;
   return (
-    <Row styles={styles}>
+    <Row styles={styles} rowRef={rowRef} index={rowIndex}>
       <Line
         line={left}
         prefix={LineNumberPrefix.LEFT}

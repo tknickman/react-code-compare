@@ -27,7 +27,7 @@ const defaultProps: ReactCodeCompareProps = {
   extraLinesSurroundingDiff: 3,
   showDiffOnly: true,
   useDarkTheme: false,
-  linesOffset: 0
+  linesOffset: 0,
 };
 
 export function ComparisonView(props: ReactCodeCompareProps) {
@@ -52,7 +52,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
     codeFoldMessageRenderer,
     useVirtual,
     parentRef,
-    virtualizerOptions
+    virtualizerOptions,
   } = props;
 
   const { expandedBlocks, setExpandedBlocks } = useCodeCompare();
@@ -102,7 +102,8 @@ export function ComparisonView(props: ReactCodeCompareProps) {
       extraLinesSurroundingDiff < 0 ? 0 : extraLinesSurroundingDiff;
     let skippedLines: number[] = [];
 
-    return lineInformation.map((line: LineInformation, i: number) => {
+    const allRowData: AllRowData = [];
+    lineInformation.forEach((line: LineInformation, i: number) => {
       const diffBlockStart = diffLines[0];
       const currentPosition = diffBlockStart - i;
       if (showDiffOnly) {
@@ -118,7 +119,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
         ) {
           skippedLines.push(i + 1);
           if (i === lineInformation.length - 1 && skippedLines.length > 1) {
-            return {
+            allRowData.push({
               type: "skipped",
               data: {
                 num: skippedLines.length,
@@ -126,16 +127,18 @@ export function ComparisonView(props: ReactCodeCompareProps) {
                 leftBlockLineNumber: line.left.lineNumber,
                 rightBlockLineNumber: line.right.lineNumber,
               },
-            };
+            });
+            return;
           }
-          return null;
+
+          return;
         }
       }
 
       if (currentPosition === extraLines && skippedLines.length > 0) {
         const { length } = skippedLines;
         skippedLines = [];
-        return {
+        allRowData.push({
           type: "skipped",
           data: {
             num: length,
@@ -143,26 +146,55 @@ export function ComparisonView(props: ReactCodeCompareProps) {
             leftBlockLineNumber: line.left.lineNumber,
             rightBlockLineNumber: line.right.lineNumber,
           },
-        };
+        });
+        return;
       }
 
       if (splitView) {
-        return {
+        allRowData.push({
           type: "split",
           data: {
             line,
             index: i,
           },
-        };
+        });
+
+        return;
       }
-      return {
+
+      if (
+        line.left.type === DiffType.REMOVED &&
+        line.right.type === DiffType.ADDED
+      ) {
+        allRowData.push({
+          type: "unified",
+          data: {
+            order: "left",
+            line,
+            index: i,
+          },
+        });
+        allRowData.push({
+          type: "unified",
+          data: {
+            order: "right",
+            line,
+            index: i,
+          },
+        });
+        return;
+      }
+
+      allRowData.push({
         type: "unified",
         data: {
           line,
           index: i,
         },
-      };
+      });
     });
+
+    return allRowData;
   };
 
   if (typeof oldValue !== "string" || typeof newValue !== "string") {
@@ -170,7 +202,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
   }
 
   const nodeData = getDiffRowData().filter(Boolean);
-  
+
   const colSpanOnSplitView = hideLineNumbers ? 2 : 3;
   const colSpanOnInlineView = hideLineNumbers ? 2 : 4;
 

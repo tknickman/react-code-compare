@@ -50,6 +50,10 @@ export function VirtualTable({
     setVirtualizer(virtualizer);
   }, [virtualizer]);
 
+  useEffect(() => {
+    virtualizer.measure();
+  }, [splitView]);
+
   const vItems = virtualizer.getVirtualItems();
 
   if (items.length === 0) {
@@ -67,6 +71,12 @@ export function VirtualTable({
         position: "relative",
       }}
     >
+      {splitView ? (
+        <colgroup>
+          <col span={3} className="left" />
+          <col span={3} className="right" />
+        </colgroup>
+      ) : undefined}
       <tbody
         style={{
           position: "absolute",
@@ -77,16 +87,10 @@ export function VirtualTable({
         }}
       >
         {title}
-        {splitView ? (
-          <colgroup>
-            <col span={3} className="left" />
-            <col span={3} className="right" />
-          </colgroup>
-        ) : undefined}
         {vItems.map((virtualItem) => {
-          const node = items[virtualItem.index];
+          const item = items[virtualItem.index];
 
-          if (node.type === "skipped") {
+          if (item.type === "skipped") {
             return (
               <SkippedLinesIndicator
                 key={virtualItem.key}
@@ -95,34 +99,41 @@ export function VirtualTable({
                 codeFoldMessageRenderer={codeFoldMessageRenderer}
                 hideLineNumbers={hideLineNumbers}
                 styles={styles}
-                num={node.data.num}
-                blockNumber={node.data.blockNumber}
-                leftBlockLineNumber={node.data.leftBlockLineNumber}
-                rightBlockLineNumber={node.data.rightBlockLineNumber}
+                num={item.data.num}
+                blockNumber={item.data.blockNumber}
+                leftBlockLineNumber={item.data.leftBlockLineNumber}
+                rightBlockLineNumber={item.data.rightBlockLineNumber}
+                rowRef={virtualizer.measureElement}
+                rowIndex={virtualItem.index}
               />
             );
           }
-          if (node.type === "split") {
+          if (item.type === "split") {
             return (
               <SplitView
                 key={virtualItem.key}
-                lineInformation={node.data.line}
+                lineInformation={item.data.line}
                 styles={styles}
                 highlightLines={highlightLines}
                 onLineNumberClickProxy={onLineNumberClickProxy}
                 diffViewOptions={diffViewOptions}
+                rowRef={virtualizer.measureElement}
+                rowIndex={virtualItem.index}
               />
             );
           }
-          if (node.type === "unified") {
+          if (item.type === "unified") {
             return (
               <InlineView
                 key={virtualItem.key}
-                lineInformation={node.data.line}
+                lineInformation={item.data.line}
+                order={item.data.order}
                 styles={styles}
                 highlightLines={highlightLines}
                 onLineNumberClickProxy={onLineNumberClickProxy}
                 diffViewOptions={diffViewOptions}
+                rowRef={virtualizer.measureElement}
+                rowIndex={virtualItem.index}
               />
             );
           }

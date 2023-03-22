@@ -6,15 +6,17 @@ export function Row({
   className,
   styles,
   children,
-  ref,
+  index,
+  rowRef,
 }: {
   className?: string;
   styles: ReactCodeCompareStyles;
   children: React.ReactNode;
-  ref?: Ref<HTMLTableRowElement>;
+  index?: number;
+  rowRef?: Ref<HTMLTableRowElement>;
 }) {
   return (
-    <tr className={cn(styles.line, className)} ref={ref}>
+    <tr className={cn(styles.line, className)} ref={rowRef} data-index={index}>
       {children}
     </tr>
   );

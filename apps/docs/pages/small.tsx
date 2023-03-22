@@ -65,9 +65,14 @@ export default function LargeExample() {
       <pre>Table Rows in Dom: {numTableRows}</pre>
       <pre>Diff Expanded: {diffExpanded}</pre>
       <button onClick={onFoldReset}>Reset</button>
-      <button onClick={() => virtualizer && virtualizer.scrollToIndex(jumpTo, { 
-        align: "start",
-      })}>
+      <button
+        onClick={() =>
+          virtualizer &&
+          virtualizer.scrollToIndex(jumpTo, {
+            align: "start",
+          })
+        }
+      >
         Jump to {jumpTo}
       </button>
       <input
@@ -77,6 +82,7 @@ export default function LargeExample() {
       <button
         onClick={() => setIsSplit((prevVal) => !prevVal)}
       >{`Toggle View (${isSplit ? "split" : "unified"})`}</button>
+      <hr />
       <DiffViewer
         oldVal={oldVal}
         newVal={newVal}

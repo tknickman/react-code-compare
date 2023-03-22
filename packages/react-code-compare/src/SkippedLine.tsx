@@ -9,11 +9,12 @@ export function SkippedLinesIndicator({
   codeFoldMessageRenderer,
   hideLineNumbers,
   styles,
-  // data
   num,
   blockNumber,
   leftBlockLineNumber,
   rightBlockLineNumber,
+  rowIndex,
+  rowRef,
 }: SkippedLineIndicatorProps & {
   onBlockClickProxy: OnBlockClickProxy;
   styles: ReactCodeCompareStyles;
@@ -21,6 +22,8 @@ export function SkippedLinesIndicator({
   blockNumber: number;
   leftBlockLineNumber: number;
   rightBlockLineNumber: number;
+  rowIndex?: number;
+  rowRef?: (node: HTMLTableRowElement) => void;
 }): JSX.Element {
   const message = codeFoldMessageRenderer ? (
     codeFoldMessageRenderer(num, leftBlockLineNumber, rightBlockLineNumber)
@@ -37,7 +40,7 @@ export function SkippedLinesIndicator({
   const isUnifiedViewWithoutLineNumbers = !splitView && !hideLineNumbers;
 
   return (
-    <Row className={styles.codeFold} styles={styles}>
+    <Row className={styles.codeFold} styles={styles} rowRef={rowRef} index={rowIndex}>
       {!hideLineNumbers && <td className={styles.codeFoldGutter} />}
       <td
         className={cn({

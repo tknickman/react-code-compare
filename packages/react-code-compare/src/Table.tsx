@@ -73,6 +73,7 @@ export function Table({
               <InlineView
                 key={idx}
                 lineInformation={item.data.line}
+                order={item.data.order}
                 styles={styles}
                 highlightLines={highlightLines}
                 onLineNumberClickProxy={onLineNumberClickProxy}
