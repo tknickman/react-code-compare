@@ -73,7 +73,8 @@ export function Line({
             [styles.diffAdded]: added,
             [styles.diffRemoved]: removed,
             [styles.highlightedGutter]: highlightLine,
-            [styles.splitCellLeft]: splitView && splitPosition === "left",
+            [styles.splitCellLeft]:
+              (splitView && splitPosition === "left") || !splitView,
             [styles.splitCellRight]: splitView && splitPosition === "right",
           })}
         >
@@ -93,6 +94,8 @@ export function Line({
             [styles.highlightedGutter]: highlightLine,
             [styles.splitCellLeft]: splitView && splitPosition === "left",
             [styles.splitCellRight]: splitView && splitPosition === "right",
+            [styles.splitCellRight]:
+              (splitView && splitPosition === "right") || !splitView,
           })}
         >
           <pre className={styles.lineNumber}>{additionalLineNumber}</pre>
@@ -106,6 +109,8 @@ export function Line({
           [styles.highlightedLine]: highlightLine,
           [styles.splitCellLeft]: splitView && splitPosition === "left",
           [styles.splitCellRight]: splitView && splitPosition === "right",
+          [styles.splitCellRight]:
+            (splitView && splitPosition === "right") || !splitView,
         })}
       >
         <pre>
@@ -121,6 +126,8 @@ export function Line({
           [styles.highlightedLine]: highlightLine,
           [styles.splitCellLeft]: splitView && splitPosition === "left",
           [styles.splitCellRight]: splitView && splitPosition === "right",
+          [styles.splitCellRight]:
+            (splitView && splitPosition === "right") || !splitView,
         })}
       >
         <pre className={styles.contentText}>{content}</pre>
