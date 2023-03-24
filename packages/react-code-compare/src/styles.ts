@@ -354,6 +354,8 @@ export default (
 
   const defaultStyles: ReactCodeCompareStyles = {
     diffContainer,
+    splitCellLeft,
+    splitCellRight,
     diffRemoved,
     diffAdded,
     splitView,
@@ -374,8 +376,6 @@ export default (
     content,
     codeFoldContent,
     titleBlock,
-    splitCellLeft,
-    splitCellRight,
   };
 
   const computerOverrideStyles: ReactCodeCompareStyles = Object.keys(
