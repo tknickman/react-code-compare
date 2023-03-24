@@ -32,6 +32,7 @@ export function SplitView({
         highlightLines={highlightLines}
         onLineNumberClickProxy={onLineNumberClickProxy}
         diffViewOptions={diffViewOptions}
+        splitPosition="left"
       />
       <Line
         line={right}
@@ -40,6 +41,7 @@ export function SplitView({
         highlightLines={highlightLines}
         onLineNumberClickProxy={onLineNumberClickProxy}
         diffViewOptions={diffViewOptions}
+        splitPosition="right"
       />
     </Row>
   );

@@ -22,6 +22,8 @@ export interface ReactCodeCompareStyles {
   titleBlock?: string;
   content?: string;
   splitView?: string;
+  splitCellLeft?: string;
+  splitCellRight?: string;
   [key: string]: string | undefined;
 }
 
@@ -77,6 +79,8 @@ export interface ReactCodeCompareStylesOverride {
   content?: Interpolation;
   titleBlock?: Interpolation;
   splitView?: Interpolation;
+  splitCellLeft?: Interpolation;
+  splitCellRight?: Interpolation;
 }
 
 export default (
@@ -158,6 +162,14 @@ export default (
       width: "50%",
     },
     label: "split-view",
+  });
+
+  const splitCellLeft = css({
+    backgroundColor: "inherit",
+  });
+
+  const splitCellRight = css({
+    backgroundColor: "inherit",
   });
 
   const diffContainer = css({
@@ -362,6 +374,8 @@ export default (
     content,
     codeFoldContent,
     titleBlock,
+    splitCellLeft,
+    splitCellRight,
   };
 
   const computerOverrideStyles: ReactCodeCompareStyles = Object.keys(

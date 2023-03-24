@@ -1,6 +1,6 @@
 {
   "name": "react-code-compare",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.6",
   "private": false,
   "description": "A simple and fast text diff viewer component",
   "keywords": [

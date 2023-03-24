@@ -30,6 +30,7 @@ export function Line({
   styles,
   highlightLines,
   onLineNumberClickProxy,
+  splitPosition,
   additionalOptions = {},
   diffViewOptions,
 }: LineProps & {
@@ -38,6 +39,7 @@ export function Line({
   styles: ReactCodeCompareStyles;
   highlightLines: string[];
   onLineNumberClickProxy: OnLineNumberClickProxy;
+  splitPosition?: "left" | "right";
   additionalLineNumber?: number;
   additionalPrefix?: SHORT_PREFIX;
 }): JSX.Element {
@@ -71,6 +73,8 @@ export function Line({
             [styles.diffAdded]: added,
             [styles.diffRemoved]: removed,
             [styles.highlightedGutter]: highlightLine,
+            [styles.splitCellLeft]: splitView && splitPosition === "left",
+            [styles.splitCellRight]: splitView && splitPosition === "right",
           })}
         >
           <pre className={styles.lineNumber}>{lineNumber}</pre>
@@ -87,6 +91,8 @@ export function Line({
             [styles.diffAdded]: added,
             [styles.diffRemoved]: removed,
             [styles.highlightedGutter]: highlightLine,
+            [styles.splitCellLeft]: splitView && splitPosition === "left",
+            [styles.splitCellRight]: splitView && splitPosition === "right",
           })}
         >
           <pre className={styles.lineNumber}>{additionalLineNumber}</pre>
@@ -98,6 +104,8 @@ export function Line({
           [styles.diffAdded]: added,
           [styles.diffRemoved]: removed,
           [styles.highlightedLine]: highlightLine,
+          [styles.splitCellLeft]: splitView && splitPosition === "left",
+          [styles.splitCellRight]: splitView && splitPosition === "right",
         })}
       >
         <pre>
@@ -111,6 +119,8 @@ export function Line({
           [styles.diffAdded]: added,
           [styles.diffRemoved]: removed,
           [styles.highlightedLine]: highlightLine,
+          [styles.splitCellLeft]: splitView && splitPosition === "left",
+          [styles.splitCellRight]: splitView && splitPosition === "right",
         })}
       >
         <pre className={styles.contentText}>{content}</pre>
