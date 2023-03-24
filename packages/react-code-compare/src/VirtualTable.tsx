@@ -18,6 +18,7 @@ import { SplitView } from "./SplitView";
 export function VirtualTable({
   title,
   items,
+  rowsKey,
   styles,
   parentRef,
   splitView,
@@ -31,6 +32,7 @@ export function VirtualTable({
 }: VirtualTableProps & {
   title: React.ReactNode;
   items: AllRowData;
+  rowsKey: string;
   styles: ReactCodeCompareStyles;
   highlightLines: string[];
   diffViewOptions: LineDiffViewOptions;
@@ -38,13 +40,17 @@ export function VirtualTable({
   onBlockClickProxy: OnBlockClickProxy;
   virtualizerOptions?: AdditionalVirtualizerOptions;
 }) {
-  const { setVirtualizer } = useCodeCompare();
+  const { setVirtualizer, setItems } = useCodeCompare();
   // TODO: parent should be a generic
   const virtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
     count: items.length,
     getScrollElement: () => parentRef.current,
     ...(virtualizerOptions || ({} as AdditionalVirtualizerOptions)),
   });
+
+  useEffect(() => {
+    setItems(items);
+  }, [rowsKey]);
 
   useEffect(() => {
     setVirtualizer(virtualizer);

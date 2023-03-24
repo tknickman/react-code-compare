@@ -202,6 +202,12 @@ export function ComparisonView(props: ReactCodeCompareProps) {
   }
 
   const nodeData = getDiffRowData().filter(Boolean);
+  const rowSummary = {
+    skipped: nodeData.filter((row) => row.type === "skipped").length,
+    split: nodeData.filter((row) => row.type === "split").length,
+    unified: nodeData.filter((row) => row.type === "unified").length,
+  };
+  const rowsKey = `skipped-${rowSummary.skipped}|split-${rowSummary.split}|unified-${rowSummary.unified}`;
 
   const colSpanOnSplitView = hideLineNumbers ? 2 : 3;
   const colSpanOnInlineView = hideLineNumbers ? 2 : 4;
@@ -233,6 +239,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
       <VirtualTable
         title={title}
         items={nodeData}
+        rowsKey={rowsKey}
         styles={styles}
         splitView={splitView}
         hideLineNumbers={hideLineNumbers}
