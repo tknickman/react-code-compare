@@ -116,7 +116,7 @@ export default function DiffView({
       <ComparisonView
         splitView={isSplit}
         showDiffOnly={true}
-        compareMethod={DiffMethod.LINES}
+        compareMethod={DiffMethod.WORDS_WITH_SPACE}
         oldValue={oldVal}
         newValue={newVal}
         styles={splitViewStyles}

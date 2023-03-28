@@ -73,6 +73,7 @@ export interface ReactCodeCompareStylesOverride {
   wordDiff?: Interpolation;
   wordAdded?: Interpolation;
   wordRemoved?: Interpolation;
+  codeFold?: Interpolation;
   codeFoldGutter?: Interpolation;
   codeFoldContent?: Interpolation;
   emptyLine?: Interpolation;
@@ -280,6 +281,7 @@ export default (
 
   const marker = css({
     width: 25,
+    minWidth: 25,
     paddingLeft: 10,
     paddingRight: 10,
     userSelect: "none",

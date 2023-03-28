@@ -5,9 +5,12 @@ import { DiffMethod, LineInformation } from "./compute-lines";
 
 export type PartialKeys<T, K extends keyof T> = Omit<T, K> &
   Partial<Pick<T, K>>;
-export type AdditionalVirtualizerOptions = PartialKeys<
-  VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>,
-  "observeElementRect" | "observeElementOffset" | "scrollToFn"
+export type AdditionalVirtualizerOptions = Omit<
+  PartialKeys<
+    VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>,
+    "observeElementRect" | "observeElementOffset" | "scrollToFn"
+  >,
+  "count" | "getScrollElement"
 >;
 
 export interface ReactCodeCompareProps {
@@ -115,7 +118,7 @@ export type SkippedRowData = {
 export type RowData = {
   type: "split" | "unified";
   data: {
-    order?: 'left' | 'right';
+    order?: "left" | "right";
     line: LineInformation;
     index: number;
   };
