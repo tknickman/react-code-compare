@@ -77,6 +77,7 @@ export function Line({
               (splitView && splitPosition === "left") || !splitView,
             [styles.splitCellRight]: splitView && splitPosition === "right",
           })}
+          data-line-number={lineNumberTemplate}
         >
           <pre className={styles.lineNumber}>{lineNumber}</pre>
         </td>
@@ -87,6 +88,7 @@ export function Line({
             additionalLineNumber &&
             onLineNumberClickProxy(additionalLineNumberTemplate)
           }
+          data-line-number={additionalLineNumberTemplate}
           className={cn(styles.gutter, {
             [styles.emptyGutter]: !additionalLineNumber,
             [styles.diffAdded]: added,
