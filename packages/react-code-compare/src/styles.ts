@@ -301,9 +301,6 @@ export default (
   const highlightedLine = css({
     background: variables.highlightBackground,
     label: "highlighted-line",
-    [`.${wordAdded}, .${wordRemoved}`]: {
-      backgroundColor: "initial",
-    },
   });
 
   const highlightedGutter = css({
