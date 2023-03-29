@@ -285,6 +285,7 @@ export default (
     paddingLeft: 10,
     paddingRight: 10,
     userSelect: "none",
+    verticalAlign: "middle",
     label: "marker",
     [`&.${diffAdded}`]: {
       pre: {
@@ -313,6 +314,7 @@ export default (
     padding: "0 10px",
     label: "gutter",
     textAlign: "right",
+    verticalAlign: "middle",
     background: variables.gutterBackground,
     "&:hover": {
       cursor: "pointer",
