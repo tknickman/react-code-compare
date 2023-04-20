@@ -15,6 +15,7 @@ export function Table({
   title,
   items,
   styles,
+  xSpacer,
   splitView,
   hideLineNumbers,
   onBlockClickProxy,
@@ -26,6 +27,7 @@ export function Table({
   title: React.ReactNode;
   items: AllRowData;
   styles: ReactCodeCompareStyles;
+  xSpacer: boolean;
   highlightLines: string[];
   diffViewOptions: LineDiffViewOptions;
   onLineNumberClickProxy: OnLineNumberClickProxy;
@@ -45,6 +47,7 @@ export function Table({
               <SkippedLinesIndicator
                 key={idx}
                 splitView={splitView}
+                xSpacer={xSpacer}
                 onBlockClickProxy={onBlockClickProxy}
                 codeFoldMessageRenderer={codeFoldMessageRenderer}
                 hideLineNumbers={hideLineNumbers}
@@ -62,6 +65,7 @@ export function Table({
                 key={idx}
                 lineInformation={item.data.line}
                 styles={styles}
+                xSpacer={xSpacer}
                 highlightLines={highlightLines}
                 onLineNumberClickProxy={onLineNumberClickProxy}
                 diffViewOptions={diffViewOptions}

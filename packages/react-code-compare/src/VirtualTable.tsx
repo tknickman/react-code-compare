@@ -20,6 +20,7 @@ export function VirtualTable({
   items,
   rowsKey,
   styles,
+  xSpacer,
   parentRef,
   splitView,
   hideLineNumbers,
@@ -34,6 +35,7 @@ export function VirtualTable({
   items: AllRowData;
   rowsKey: string;
   styles: ReactCodeCompareStyles;
+  xSpacer: boolean;
   highlightLines: string[];
   diffViewOptions: LineDiffViewOptions;
   onLineNumberClickProxy: OnLineNumberClickProxy;
@@ -105,6 +107,7 @@ export function VirtualTable({
                 codeFoldMessageRenderer={codeFoldMessageRenderer}
                 hideLineNumbers={hideLineNumbers}
                 styles={styles}
+                xSpacer={xSpacer}
                 num={item.data.num}
                 blockNumber={item.data.blockNumber}
                 leftBlockLineNumber={item.data.leftBlockLineNumber}
@@ -120,6 +123,7 @@ export function VirtualTable({
                 key={virtualItem.key}
                 lineInformation={item.data.line}
                 styles={styles}
+                xSpacer={xSpacer}
                 highlightLines={highlightLines}
                 onLineNumberClickProxy={onLineNumberClickProxy}
                 diffViewOptions={diffViewOptions}

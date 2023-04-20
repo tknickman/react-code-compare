@@ -59,6 +59,7 @@ export interface ReactCodeCompareProps {
   useVirtual?: boolean;
   parentRef?: React.RefObject<HTMLDivElement>;
   virtualizerOptions?: AdditionalVirtualizerOptions;
+  xSpacer?: boolean;
 }
 
 export type VirtualTableProps = Pick<

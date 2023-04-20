@@ -28,6 +28,7 @@ const defaultProps: ReactCodeCompareProps = {
   showDiffOnly: true,
   useDarkTheme: false,
   linesOffset: 0,
+  xSpacer: false
 };
 
 export function ComparisonView(props: ReactCodeCompareProps) {
@@ -53,6 +54,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
     useVirtual,
     parentRef,
     virtualizerOptions,
+    xSpacer,
   } = props;
 
   const { expandedBlocks, setExpandedBlocks } = useCodeCompare();
@@ -241,6 +243,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
         items={nodeData}
         rowsKey={rowsKey}
         styles={styles}
+        xSpacer={xSpacer}
         splitView={splitView}
         hideLineNumbers={hideLineNumbers}
         highlightLines={highlightLines}
@@ -259,6 +262,7 @@ export function ComparisonView(props: ReactCodeCompareProps) {
       title={title}
       items={nodeData}
       styles={styles}
+      xSpacer={xSpacer}
       splitView={splitView}
       hideLineNumbers={hideLineNumbers}
       highlightLines={highlightLines}

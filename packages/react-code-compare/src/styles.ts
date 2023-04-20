@@ -24,6 +24,8 @@ export interface ReactCodeCompareStyles {
   splitView?: string;
   splitCellLeft?: string;
   splitCellRight?: string;
+  xCenterSpacer?: string;
+  xOuterSpacer?: string;
   [key: string]: string | undefined;
 }
 
@@ -52,6 +54,8 @@ export interface ReactCodeCompareStylesVariables {
   addedGutterColor?: string;
   removedGutterColor?: string;
   codeFoldContentColor?: string;
+  xCenterSpacerWidth?: string;
+  xOuterSpacerWidth?: string;
 }
 
 export interface ReactCodeCompareStylesOverride {
@@ -82,6 +86,7 @@ export interface ReactCodeCompareStylesOverride {
   splitView?: Interpolation;
   splitCellLeft?: Interpolation;
   splitCellRight?: Interpolation;
+  xSpacer?: Interpolation;
 }
 
 export default (
@@ -279,6 +284,16 @@ export default (
     label: "empty-line",
   });
 
+  const xOuterSpacer = css({
+    width: variables.xOuterSpacerWidth,
+    display: "block"
+  });
+
+  const xCenterSpacer = css({
+    width: variables.xCenterSpacerWidth,
+    display: "block"
+  });
+
   const marker = css({
     width: 25,
     minWidth: 25,
@@ -362,7 +377,7 @@ export default (
     diffRemoved,
     diffAdded,
     splitView,
-    marker,    
+    marker,
     gutter,
     line,
     wordDiff,
@@ -377,6 +392,8 @@ export default (
     content,
     codeFoldContent,
     titleBlock,
+    xCenterSpacer,
+    xOuterSpacer,
   };
 
   const computerOverrideStyles: ReactCodeCompareStyles = Object.keys(

@@ -5,6 +5,7 @@ import { Row } from "./Row";
 
 export function SkippedLinesIndicator({
   splitView,
+  xSpacer,
   onBlockClickProxy,
   codeFoldMessageRenderer,
   hideLineNumbers,
@@ -18,6 +19,7 @@ export function SkippedLinesIndicator({
 }: SkippedLineIndicatorProps & {
   onBlockClickProxy: OnBlockClickProxy;
   styles: ReactCodeCompareStyles;
+  xSpacer: boolean;
   num: number;
   blockNumber: number;
   leftBlockLineNumber: number;
@@ -41,6 +43,7 @@ export function SkippedLinesIndicator({
 
   return (
     <Row className={styles.codeFold} styles={styles} rowRef={rowRef} index={rowIndex}>
+      {xSpacer && <td className={styles.xSpacer} />}
       {!hideLineNumbers && <td className={styles.codeFoldGutter} />}
       <td
         className={cn({
@@ -62,6 +65,7 @@ export function SkippedLinesIndicator({
       )}
       <td />
       <td />
+      {xSpacer && <td className={styles.xSpacer} />}
     </Row>
   );
 }

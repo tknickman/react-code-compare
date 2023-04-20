@@ -7,7 +7,9 @@ import {
 
 import styles from "./styles.module.css";
 
-const theme = "light";
+type Theme = "light" | "dark";
+
+const theme: Theme = "light";
 
 export const splitViewStyles: ReactCodeCompareStylesOverride = {
   diffContainer: {
@@ -18,6 +20,10 @@ export const splitViewStyles: ReactCodeCompareStylesOverride = {
   },
   contentText: {
     overflowWrap: "anywhere",
+  },
+  xSpacer: {
+    width: 50,
+    height: '100%'
   },
   codeFoldContent: {
     overflowWrap: "anywhere",
@@ -127,6 +133,7 @@ export default function DiffView({
           estimateSize: () => 20,
           overscan: 10,
         }}
+        xSpacer
       />
     </div>
   );

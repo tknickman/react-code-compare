@@ -8,6 +8,7 @@ import { Line } from "./Line";
 export function SplitView({
   lineInformation,
   styles,
+  xSpacer,
   highlightLines,
   onLineNumberClickProxy,
   diffViewOptions,
@@ -16,6 +17,7 @@ export function SplitView({
 }: {
   lineInformation: LineInformation;
   styles: ReactCodeCompareStyles;
+  xSpacer: boolean;
   highlightLines: string[];
   onLineNumberClickProxy: OnLineNumberClickProxy;
   diffViewOptions: LineDiffViewOptions;
@@ -25,6 +27,7 @@ export function SplitView({
   const { left, right } = lineInformation;
   return (
     <Row styles={styles} rowRef={rowRef} index={rowIndex}>
+      {xSpacer && <td className={styles.xOuterSpacer} />}
       <Line
         line={left}
         prefix={LineNumberPrefix.LEFT}
@@ -34,6 +37,7 @@ export function SplitView({
         diffViewOptions={diffViewOptions}
         splitPosition="left"
       />
+      {xSpacer && <td className={styles.xCenterSpacer} />}
       <Line
         line={right}
         prefix={LineNumberPrefix.RIGHT}
@@ -43,6 +47,7 @@ export function SplitView({
         diffViewOptions={diffViewOptions}
         splitPosition="right"
       />
+      {xSpacer && <td className={styles.xOuterSpacer} />}
     </Row>
   );
 }
