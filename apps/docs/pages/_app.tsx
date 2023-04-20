@@ -1,10 +1,14 @@
-import type { AppProps } from "next/app";
-import { CodeCompareProvider } from "react-code-compare";
+import "../styles/globals.css";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <CodeCompareProvider>
-      <Component {...pageProps} />
-    </CodeCompareProvider>
-  );
+import type { AppProps } from "next/app";
+import type { ReactNode } from "react";
+
+type NextraAppProps = AppProps & {
+  Component: AppProps["Component"] & {
+    getLayout: (page: ReactNode) => ReactNode;
+  };
+};
+
+export default function Nextra({ Component, pageProps }: NextraAppProps) {
+  return <Component {...pageProps} />;
 }

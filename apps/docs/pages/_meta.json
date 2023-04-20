@@ -1,0 +1,15 @@
+{
+  "index": "Introduction",
+  "getting-started": {
+    "title": "Getting Started"
+  },
+  "props": {
+    "title": "API"
+  },
+  "examples": {
+    "title": "Examples"
+  },
+  "about": {
+    "title": "About"
+  }
+}

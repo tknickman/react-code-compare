@@ -1,8 +1,9 @@
 .container {
   overflow-y: auto;
+  min-height: 250px;
   height: 500px;
-  width: 60%;
-  border: 1px solid red;
+  width: 900px;
   position: relative;
+  background: var(--geist-background);
   font-size: 12px;
 }
