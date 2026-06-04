@@ -38,15 +38,15 @@
     "lint": "eslint --ext .ts,.tsx src"
   },
   "dependencies": {
+    "@emotion/css": "^11.11.0",
     "@tanstack/react-virtual": "3.0.0-beta.54",
     "classnames": "^2.2.6",
-    "create-emotion": "^10.0.14",
     "diff": "^4.0.1",
-    "emotion": "^10.0.14",
     "memoize-one": "^5.0.4",
     "prop-types": "^15.6.2"
   },
   "devDependencies": {
+    "@emotion/serialize": "^1.1.0",
     "@types/classnames": "^2.2.6",
     "@types/diff": "^4.0.2",
     "@types/memoize-one": "^4.1.1",

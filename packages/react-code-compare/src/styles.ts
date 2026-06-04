@@ -1,5 +1,5 @@
-import { css, cx } from "emotion";
-import { Interpolation } from "create-emotion";
+import { css, cx } from "@emotion/css";
+import type { CSSInterpolation } from "@emotion/serialize";
 
 export interface ReactCodeCompareStyles {
   diffContainer?: string;
@@ -63,30 +63,30 @@ export interface ReactCodeCompareStylesOverride {
     dark?: ReactCodeCompareStylesVariables;
     light?: ReactCodeCompareStylesVariables;
   };
-  diffContainer?: Interpolation;
-  diffRemoved?: Interpolation;
-  diffAdded?: Interpolation;
-  marker?: Interpolation;
-  emptyGutter?: Interpolation;
-  highlightedLine?: Interpolation;
-  lineNumber?: Interpolation;
-  highlightedGutter?: Interpolation;
-  contentText?: Interpolation;
-  gutter?: Interpolation;
-  line?: Interpolation;
-  wordDiff?: Interpolation;
-  wordAdded?: Interpolation;
-  wordRemoved?: Interpolation;
-  codeFold?: Interpolation;
-  codeFoldGutter?: Interpolation;
-  codeFoldContent?: Interpolation;
-  emptyLine?: Interpolation;
-  content?: Interpolation;
-  titleBlock?: Interpolation;
-  splitView?: Interpolation;
-  splitCellLeft?: Interpolation;
-  splitCellRight?: Interpolation;
-  xSpacer?: Interpolation;
+  diffContainer?: CSSInterpolation;
+  diffRemoved?: CSSInterpolation;
+  diffAdded?: CSSInterpolation;
+  marker?: CSSInterpolation;
+  emptyGutter?: CSSInterpolation;
+  highlightedLine?: CSSInterpolation;
+  lineNumber?: CSSInterpolation;
+  highlightedGutter?: CSSInterpolation;
+  contentText?: CSSInterpolation;
+  gutter?: CSSInterpolation;
+  line?: CSSInterpolation;
+  wordDiff?: CSSInterpolation;
+  wordAdded?: CSSInterpolation;
+  wordRemoved?: CSSInterpolation;
+  codeFold?: CSSInterpolation;
+  codeFoldGutter?: CSSInterpolation;
+  codeFoldContent?: CSSInterpolation;
+  emptyLine?: CSSInterpolation;
+  content?: CSSInterpolation;
+  titleBlock?: CSSInterpolation;
+  splitView?: CSSInterpolation;
+  splitCellLeft?: CSSInterpolation;
+  splitCellRight?: CSSInterpolation;
+  xSpacer?: CSSInterpolation;
 }
 
 export default (
