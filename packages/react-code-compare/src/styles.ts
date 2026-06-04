@@ -54,8 +54,8 @@ export interface ReactCodeCompareStylesVariables {
   addedGutterColor?: string;
   removedGutterColor?: string;
   codeFoldContentColor?: string;
-  xCenterSpacerWidth?: string;
-  xOuterSpacerWidth?: string;
+  xCenterSpacerWidth?: number;
+  xOuterSpacerWidth?: number;
 }
 
 export interface ReactCodeCompareStylesOverride {
