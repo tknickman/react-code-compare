@@ -34,6 +34,10 @@ module.exports = {
         caughtErrorsIgnorePattern: "^_",
       },
     ],
+    // The base `no-shadow` rule misfires on TypeScript enums (reporting each
+    // enum as shadowing itself); defer to the TS-aware version instead.
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
   },
   env: {
     node: true,

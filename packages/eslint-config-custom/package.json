@@ -18,6 +18,9 @@
   "devDependencies": {
     "typescript": "^4.7.4"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public"
   },
