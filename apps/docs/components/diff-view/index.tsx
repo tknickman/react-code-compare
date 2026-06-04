@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 
 type Theme = "light" | "dark";
 
-const theme: Theme = "light";
+const theme = "light" as Theme;
 
 export const splitViewStyles: ReactCodeCompareStylesOverride = {
   diffContainer: {
@@ -102,13 +102,13 @@ export const splitViewStyles: ReactCodeCompareStylesOverride = {
 export default function DiffView({
   oldVal,
   newVal,
-  isSplit,
+  isSplit = true,
   onDiffExpand,
 }: {
   oldVal: string;
   newVal: string;
-  isSplit: boolean;
-  onDiffExpand: (expandedBlocks: number[]) => void;
+  isSplit?: boolean;
+  onDiffExpand?: (expandedBlocks: number[]) => void;
 }) {
   const diffView = useRef<HTMLDivElement>(null);
   useEffect(() => {

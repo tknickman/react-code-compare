@@ -17,6 +17,15 @@
   ],
   "license": "MIT",
   "author": "Tom Knickman",
+  "homepage": "https://github.com/tknickman/react-code-compare#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tknickman/react-code-compare.git",
+    "directory": "packages/react-code-compare"
+  },
+  "bugs": {
+    "url": "https://github.com/tknickman/react-code-compare/issues"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -57,6 +66,6 @@
     "react-dom": "^17.0.0 || ^18.0.0"
   },
   "engines": {
-    "node": ">= 16.0.0"
+    "node": ">=18"
   }
 }
