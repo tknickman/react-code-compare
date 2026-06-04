@@ -35,7 +35,8 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit",
-    "lint": "eslint --ext .ts,.tsx src"
+    "lint": "eslint --ext .ts,.tsx src",
+    "prepublishOnly": "pnpm build"
   },
   "dependencies": {
     "@emotion/css": "^11.11.0",

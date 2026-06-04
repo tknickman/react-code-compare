@@ -165,6 +165,37 @@ import DiffView, {           // default — provider-wrapped diff component
 } from "react-code-compare";
 ```
 
+## Releasing
+
+This package is published to npm as
+[`react-code-compare`](https://www.npmjs.com/package/react-code-compare).
+
+1. **Merge your changes to `main`** and pull the latest:
+   ```bash
+   git checkout main && git pull
+   ```
+2. **Bump the version** in `packages/react-code-compare/package.json`
+   (follow [semver](https://semver.org/)), commit, and merge via PR:
+   ```bash
+   # edit "version" in packages/react-code-compare/package.json
+   git commit -am "chore(react-code-compare): release vX.Y.Z"
+   ```
+3. **Install and publish** from the package directory:
+   ```bash
+   pnpm install
+   cd packages/react-code-compare
+   pnpm publish
+   ```
+
+`pnpm publish` runs the `prepublishOnly` hook, which builds the package with
+`tsup` first — so the published `dist/` is always freshly built. Only `dist/`
+and the README are included in the tarball (see the `files` field). Verify
+what will be published without uploading anything with:
+
+```bash
+npm pack --dry-run
+```
+
 ## License
 
 MIT © [Tom Knickman](https://github.com/tknickman)
